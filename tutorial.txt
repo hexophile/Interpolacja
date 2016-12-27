@@ -1,0 +1,12 @@
+git add readme.md
+git commit -m "Initial commit."
+git remote add origin ssh://kuba@192.168.1.100:29418/~kuba/misc.git
+git push --set-upstream origin master
+
+or
+
+git remote add origin ssh://kuba@192.168.1.100:29418/~kuba/misc.git
+git add readme.md
+git commit -m "Initial commit."
+git push origin HEAD
+git push --set-upstream origin master
