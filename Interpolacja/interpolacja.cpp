@@ -15,10 +15,10 @@ float r_xp(int n, int i, float a, float b)
 float *rownoodlegleX(int n, float a, float b)
 {
 	if ((a < b) && (n > 0)) {
-		float *tab = new float[n];
+		float *tab = new float[n+1];
 
 // Dla n = 7 zostanie wygenerowanych... 8 punktów. Od -3 do -3 w³¹cznie. Nie wiem czy to ma tak byæ, teraz generujê 7
-		for (int i = 0; i < n; i++)
+		for (int i = 0; i <= n; i++)
 		{
 			tab[i] = r_xp(n, i, a, b);
 		}
@@ -43,10 +43,10 @@ float *rownoodlegleX(int n, float a, float b)
 float *optymalneX(int n, float a, float b)
 {
 	if ((a < b) && (n > 0)) {
-		float *tab = new float[n];
+		float *tab = new float[n+1];
 		float temp1, temp2;
 
-		for (int i = 0; i < n; i++)
+		for (int i = 0; i <= n; i++)
 		{
 			temp1 = (2 * i) + 1;
 			temp2 = (2 * n) + 2;
@@ -108,9 +108,10 @@ float iloraz_roznicowy(int n, float *x, float *f)
 
 		for (int i = 0; i < n; i++) // suma
 		{
-			for (int j = 0; (j < n) && (j != i); j++)
+			for (int j = 0; j < n; j++)
 			{
-				iloczyn *= (x[i] - x[j]);
+				if (j != i)
+					iloczyn *= (x[i] - x[j]);
 			}
 			suma += f[i] / iloczyn;
 		}

@@ -19,10 +19,10 @@ int main()
 
 		float *L = wypelnij_L(n, np, x, xp, f); // brak
 
-		for (int i = 0; i < n; i++)
-			cout << "f(" << x[i] << ")\t = " << f[i] << endl;
+		for (int i = 0; i <= n; i++)
+			cout << "f(" << x[i] << ") = " << ((i<n)?f[i]:0.0) << endl;
 
-		for (int i = 0; i < n; i++)
+		for (int i = 0; i <= n; i++)
 			cout << "optX[" << i << "] = " << optX[i] << endl;
 
 		for (int i = 0; i < n; i++)
