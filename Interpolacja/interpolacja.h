@@ -80,4 +80,16 @@ float *f - wartoœci funkcji interpolowanej
 */
 float *wypelnij_L( int n, int np, float *x, float *xp, float *f );
 
-// void zapisz_wyniki();
+/*
+Funkcja zapisuje wyniki operacji do pliku
+
+string fn - nazwa pliku
+int n - liczba punktów
+int np - liczba punktów
+float *x - punkty
+float *xp - punkty
+float *f - wartoœci funkcji interpolowanej
+float a - pocz¹tek przedzia³u
+float b - koniec przedzia³u
+*/
+void zapisz_wyniki(char *fn, int n, int np, float *x, float *xp, float *f, float a, float b);

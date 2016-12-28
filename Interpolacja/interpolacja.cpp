@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <math.h>
 #include <exception>
 #include "interpolacja.h"
@@ -225,5 +226,50 @@ float *wypelnij_L(int n, int np, float *x, float *xp, float *f)
 			exc = "GeneralException; at ";
 		}
 		throw exception(exc.append(__func__).c_str());
+	}
+}
+
+// Funkcja zapisuje wyniki operacji do pliku
+void zapisz_wyniki(char *fn, int n, int np, float *x, float *xp, float *f, float a, float b)
+{
+	if ((fn != NULL) && (fn != "")) {
+		fstream plik;
+		plik.open(fn);
+
+		if (plik)
+		{
+			plik << n << " " << np << a << b << endl;
+
+			for (int i = 0; i < n; i++)
+			{
+				plik << x[i] << endl;
+			}
+
+			for (int i = 0; i < np; i++)
+			{
+				plik << xp[i] << endl;
+			}
+
+			for (int i = 0; i < n; i++)
+			{
+				plik << f[i] << endl;
+			}
+
+			plik.close();
+		}
+		else
+		{
+			string exc;
+			if (!plik) {
+				exc = "IOFileException; at ";
+			}
+			throw exception(exc.append(__func__).c_str());
+		}
+	} // TODO: rest of the exceptions
+	else {
+		string exc;
+		exc = "FileNamingException; at ";
+		throw exception(exc.append(__func__).c_str());
+		// General exception
 	}
 }
