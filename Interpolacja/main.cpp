@@ -17,13 +17,16 @@ int main()
 		float *xp = rownoodlegleX(np, a, b);
 		float *fp = wypelnij_fp(np, xp);
 
-	//	float *L = wypelnij_L(); // brak
+		float *L = wypelnij_L(n, np, x, xp, f); // brak
 
 		for (int i = 0; i < n; i++)
 			cout << "f(" << x[i] << ")\t = " << f[i] << endl;
 
 		for (int i = 0; i < n; i++)
-			cout << "opt x = " << optX[i] << endl;
+			cout << "optX[" << i << "] = " << optX[i] << endl;
+
+		for (int i = 0; i < n; i++)
+			cout << "L(" << x[i] << ")\t = " << L[i] << endl;
 	}
 	catch (exception e)
 	{

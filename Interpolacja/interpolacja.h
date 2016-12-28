@@ -42,7 +42,7 @@ int i - wartoœæ iteracyjna
 float xp - czynnik iloczynu
 float *x - lista czynników do iloczynu
 */
-float omega(int i, float xp, float *x);
+float omega(int i, float x, float *xp);
 
 /*
 Funkcja obliczaj¹ca wartoœæ parametru 'a' we wzorze newtona
@@ -78,6 +78,6 @@ float *x - punkty
 float *xp - punkty
 float *f - wartoœci funkcji interpolowanej
 */
-float *wypelnij_L( int n, int np, float *x, float *xp );
+float *wypelnij_L( int n, int np, float *x, float *xp, float *f );
 
 // void zapisz_wyniki();
