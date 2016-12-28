@@ -6,7 +6,7 @@
 using namespace std;
 
 // Szacowanie wartoœci punktu 'x' w równoodleg³ym wybieraniu punktów na zadanym przedziale
-float xp(int n, int i, float a, float b)
+float r_xp(int n, int i, float a, float b)
 {
 	return a + i * ((b - a) / n);
 }
@@ -17,9 +17,10 @@ float *rownoodlegleX(int n, float a, float b)
 	if ((a < b) && (n > 0)) {
 		float *tab = new float[n];
 
-		for (int i = 0; i <= n; i++)
+// Dla n = 7 zostanie wygenerowanych... 8 punktów. Od -3 do -3 w³¹cznie. Nie wiem czy to ma tak byæ, teraz generujê 7
+		for (int i = 0; i < n; i++)
 		{
-			tab[i] = xp(n, i, a, b);
+			tab[i] = r_xp(n, i, a, b);
 		}
 		return tab;
 	}
@@ -45,7 +46,7 @@ float *optymalneX(int n, float a, float b)
 		float *tab = new float[n];
 		float temp1, temp2;
 
-		for (int i = 0; i <= n; i++)
+		for (int i = 0; i < n; i++)
 		{
 			temp1 = (2 * i) + 1;
 			temp2 = (2 * n) + 2;
@@ -139,6 +140,7 @@ float *wypelnij_f(int n, float *x)
 		for (int i = 0; i < n; i++)
 		{
 			f[i] = abs(sin(x[i]));
+			cout << "f" << i << "=" << f[i] << endl;
 		}
 		return f;
 	}

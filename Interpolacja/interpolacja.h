@@ -15,7 +15,7 @@ int i - parametr iteracyjny
 float a - pocz¹tek przedzia³u
 float b - koniec przedzia³u
 */
-float xp(int n, int i, float a, float b);
+float r_xp(int n, int i, float a, float b);
 
 /*
 Wybieranie 'n' równoodleg³ych punktów 'x' na zadanym przedziale
