@@ -34,10 +34,15 @@ float *optymalneX(int n, float a, float b)
 {
 	if (a < b) {
 		float *tab = new float[n];
+		float temp1, temp2;
 
 		for (int i = 0; i <= n; i++)
 		{
-			tab[i] = 0.5*(a + b) - (0.5*(b - a))*(cos(((2 * i + 1) / (2 * n + 2))*PI));
+			temp1 = (2 * i) + 1;
+			temp2 = (2 * n) + 2;
+			temp1 /= temp2;
+			temp1 *= PI;
+			tab[i] = 0.5*(a + b) - (0.5*(b - a))*(cos(temp1));
 		}
 		return tab;
 	}
