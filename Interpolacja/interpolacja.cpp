@@ -3,7 +3,6 @@
 #include <exception>
 #include "interpolacja.h"
 
-
 using namespace std;
 
 // Szacowanie wartoœci punktu 'x' w równoodleg³ym wybieraniu punktów na zadanym przedziale
@@ -15,7 +14,7 @@ float xp(int n, int i, float a, float b)
 // Wybieranie 'n' równoodleg³ych punktów 'x' na zadanym przedziale
 float *rownoodlegleX(int n, float a, float b)
 {
-	if (a < b) {
+	if ((a < b) && (n > 0)) {
 		float *tab = new float[n];
 
 		for (int i = 0; i <= n; i++)
@@ -25,14 +24,24 @@ float *rownoodlegleX(int n, float a, float b)
 		return tab;
 	}
 	else {
-		throw exception("Insufficient range");
+		string exc;
+		if (n <= 0) {
+			exc = "InsufficientNodesAmountException: n <= 0; at ";
+		}
+		else if (a >= b) {
+			exc = "InsufficientRangeException: parameter float a <= float b; at ";
+		}
+		else {
+			exc = "GeneralException; at ";
+		}
+		throw exception(exc.append(__func__).c_str());
 	}
 }
 
 // Dobieranie 'n' optymalnie odleg³ych punktów 'x' na zadanym przedziale
 float *optymalneX(int n, float a, float b)
 {
-	if (a < b) {
+	if ((a < b) && (n > 0)) {
 		float *tab = new float[n];
 		float temp1, temp2;
 
@@ -47,7 +56,17 @@ float *optymalneX(int n, float a, float b)
 		return tab;
 	}
 	else {
-		throw exception("Insufficient range");
+		string exc;
+		if (n <= 0) {
+			exc = "InsufficientNodesAmountException: n <= 0; at ";
+		}
+		else if (a >= b) {
+			exc = "InsufficientRangeException: parameter float a <= float b; at ";
+		}
+		else {
+			exc = "GeneralException; at ";
+		}
+		throw exception(exc.append(__func__).c_str());
 	}
 }
 
@@ -62,18 +81,27 @@ float omega(int i, float xp, float *x)
 		}
 		return iloczyn;
 	}
-	else
-	{
-		// Jak coœ posz³o nie tak z parametrami, wyrzuæ wyj¹tek z nazw¹ funkcji.
-		throw exception(__func__);
+	else {
+		string exc;
+		if (i <= 0) {
+			exc = "InsufficientIterationValueException: i <= 0; at ";
+		}
+		else if (x == NULL) {
+			exc = "NullPointerException: parameter float *x; at ";
+		}
+		else {
+			exc = "GeneralException; at ";
+		}
+		throw exception(exc.append(__func__).c_str());
 	}
 }
 
-//
+// Funkcja obliczaj¹ca wartoœæ parametru 'a' we wzorze newtona
 float iloraz_roznicowy(int n, float *x, float *f)
 {
 	if ((n > 0) && (x != NULL) && (f != NULL)) {
 		float suma = 0, iloczyn = 1;
+
 		for (int i = 0; i < n; i++) // suma
 		{
 			for (int j = 0; (j < n) && (j != i); j++)
@@ -84,13 +112,25 @@ float iloraz_roznicowy(int n, float *x, float *f)
 		}
 		return suma;
 	}
-	else
-	{
-		throw exception(__func__);
+	else {
+		string exc;
+		if (n <= 0) {
+			exc = "InsufficientNodesAmountException: n <= 0; at ";
+		}
+		else if (x == NULL) {
+			exc = "NullPointerException: parameter float *x; at ";
+		}
+		else if (f == NULL) {
+			exc = "NullPointerException: parameter float *xp; at ";
+		}
+		else {
+			exc = "GeneralException; at ";
+		}
+		throw exception(exc.append(__func__).c_str());
 	}
 }
 
-// Obliczanie wartoœci funkcji 'f(x)' w '*x' punktach
+// Obliczanie wartoœci funkcji 'f(x)' w punktach '*x'
 float *wypelnij_f(int n, float *x)
 {
 	if ((n > 0) && (x != NULL)) {
@@ -102,17 +142,22 @@ float *wypelnij_f(int n, float *x)
 		}
 		return f;
 	}
-	else if (x == NULL) {
-		throw exception("NullPointerException: parameter float *x");
-	}
-	else if (n <= 0) {
-		throw exception("Insufficient amount of nodes: n <= 0");
-	}
 	else {
-		throw exception(__func__);
+		string exc;
+		if (n <= 0) {
+			exc = "InsufficientNodesAmountException: n <= 0; at ";
+		}
+		else if (x == NULL) {
+			exc = "NullPointerException: parameter float *x; at ";
+		}
+		else {
+			exc = "GeneralException; at ";
+		}
+		throw exception(exc.append(__func__).c_str());
 	}
 }
 
+// Obliczanie wartoœci funkcji 'f(x)' w punktach '*xp'
 float *wypelnij_fp(int np, float *xp)
 {
 	if ((np > 0) && (xp != NULL)) {
@@ -124,18 +169,51 @@ float *wypelnij_fp(int np, float *xp)
 		}
 		return fp;
 	}
-	else if (xp == NULL) {
-		throw exception("NullPointerException: parameter float *xp");
-	}
-	else if (np <= 0) {
-		throw exception("Insufficient amount of nodes: np <= 0");
-	}
 	else {
-		throw exception(__func__);
+		string exc;
+		if (np <= 0) {
+			exc = "InsufficientNodesAmountException: np <= 0; at ";
+		}
+		else if (xp == NULL) {
+			exc = "NullPointerException: parameter float *xp; at ";
+		}
+		else {
+			exc = "GeneralException; at ";
+		}
+		throw exception(exc.append(__func__).c_str());
 	}
 }
 
-float *wypelnij_L()
+
+// Funkcja obliczaj¹ca wartoœci ze wzoru Newtona
+float *wypelnij_L(int n, int np, float *x, float *xp)
 {
-	return new float(PI);
+	if ((n > 0) && (np > 0) && (x != NULL) && (xp != NULL) ){
+		float *L = new float[n];
+
+		for (int i = 0; i < n; i++)
+		{
+			L[i] = abs(sin(L[i]));
+		}
+		return L;
+	}
+	else {
+		string exc;
+		if (n <= 0) {
+			exc = "InsufficientNodesAmountException: n <= 0; at ";
+		}
+		else if (np <= 0) {
+			exc = "InsufficientNodesAmountException: np <= 0; at ";
+		}
+		else if (x == NULL) {
+			exc = "NullPointerException: parameter float *x; at ";
+		}
+		else if (xp == NULL) {
+			exc = "NullPointerException: parameter float *xp; at ";
+		}
+		else {
+			exc = "GeneralException; at ";
+		}
+		throw exception(exc.append(__func__).c_str());
+	}
 }

@@ -4,6 +4,7 @@
 
 #pragma once
 
+// Nie dzia³a³y nam 'w³¹czniki' math.h wiêc skopiowaliœmy definicjê.
 #define PI 3.14159265358979323846
 
 /*
@@ -44,7 +45,7 @@ float *x - lista czynników do iloczynu
 float omega(int i, float xp, float *x);
 
 /*
-
+Funkcja obliczaj¹ca wartoœæ parametru 'a' we wzorze newtona
 
 int n - liczba punktów
 float *x - punkty
@@ -53,7 +54,7 @@ float *f - wartoœci funkcji w '*x' punktach
 float iloraz_roznicowy(int n, float *x, float *f);
 
 /*
-Obliczanie wartoœci funkcji interpolowanej f(x) w '*x' punktach
+Obliczanie wartoœci funkcji interpolowanej f(x) w punktach '*x'
 
 int n - liczba punktów
 float *x - punkty
@@ -61,12 +62,22 @@ float *x - punkty
 float *wypelnij_f(int n, float *x);
 
 /*
-Obliczanie wartoœci funkcji interpolowanej f(x) w '*xp' punktach 
+Obliczanie wartoœci funkcji interpolowanej f(x) w punktach  '*xp'
 
 int np - liczba punktów
 float *xp - punkty
 */
 float *wypelnij_fp(int np, float *xp);
 
-/* */
-float *wypelnij_L();
+/*
+Funkcja obliczaj¹ca wartoœci ze wzoru Newtona
+
+int n - liczba punktów
+int np - liczba punktów
+float *x - punkty
+float *xp - punkty
+float *f - wartoœci funkcji interpolowanej
+*/
+float *wypelnij_L( int n, int np, float *x, float *xp );
+
+// void zapisz_wyniki();
