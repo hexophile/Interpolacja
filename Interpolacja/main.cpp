@@ -25,7 +25,7 @@ int main()
 		for (int i = 0; i <= n; i++)
 			cout << "optX[" << i << "] = " << optX[i] << endl;
 
-		for (int i = 0; i < n; i++)
+		for (int i = 0; i < np; i++)
 			cout << "L(" << x[i] << ")\t = " << L[i] << endl;
 	}
 	catch (exception e)

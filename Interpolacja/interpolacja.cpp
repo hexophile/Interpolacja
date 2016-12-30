@@ -196,13 +196,13 @@ float *wypelnij_fp(int np, float *xp)
 float *wypelnij_L(int n, int np, float *x, float *xp, float *f)
 {
 	if ((n > 0) && (np > 0) && (x != NULL) && (xp != NULL) ){
-		float *L = new float[n];
+		float *L = new float[np];
 		float temp = 0;
 
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < np; i++) {
 			for (int j = 0; j < np; j++)
 			{
-				temp += iloraz_roznicowy(i, x, f) * omega(j, x[i], xp);
+				temp += iloraz_roznicowy(i, x, f) * omega(j, xp[i], x);
 			}
 			L[i] = temp;
 		}
