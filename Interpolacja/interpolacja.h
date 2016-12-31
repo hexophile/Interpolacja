@@ -42,7 +42,7 @@ int &i - wartoœæ iteracyjna
 float &xp - czynnik iloczynu
 float *x - lista czynników do iloczynu
 */
-float omega(int &i, float &x, float *xp);
+float omega(int &i, float *x, float &xp);
 
 /*
 Funkcja obliczaj¹ca wartoœæ parametru 'a' we wzorze newtona
