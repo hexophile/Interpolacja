@@ -73,17 +73,17 @@ float *optymalneX(int n, float a, float b)
 }
 
 // Obliczanie wartoœci omegi
-float omega(int i, float x, float *xp)
+float omega(int i, float *x, float xp)
 {
 	if ((i > 0) && (x != NULL)) {
 		float iloczyn = 1;
 		for (int j = 0; j < i - 1; j++)
 		{
-			iloczyn *= (x - xp[j]);
+			iloczyn *= (xp - x[j]);        //omega od x czyli dla 1 z tych 150
 		}
 		return iloczyn;
 	}
-	else if(i == 0) {
+	else if (i == 0) {
 		return 1; // wynika to z definicji wielomianu czynnikowego
 	}
 	else {
@@ -104,10 +104,10 @@ float omega(int i, float x, float *xp)
 // Funkcja obliczaj¹ca wartoœæ parametru 'a' we wzorze newtona
 float iloraz_roznicowy(int n, float *x, float *f)
 {
-	if ((n > 0) && (x != NULL) && (f != NULL)) {
+	if ((n >= 0) && (x != NULL) && (f != NULL)) {
 		float suma = 0, iloczyn = 1;
-
-		for (int i = 0; i < n; i++) // suma
+		suma = f[0];                //iloraz 0 rzedzu oparty na punkcie xi ma wartosc funkci w tym punkcie
+		for (int i = 1; i < n; i++) // suma od 1 bo dla 0 nic sie nie dzieje
 		{
 			for (int j = 0; j < n; j++)
 			{
@@ -195,38 +195,38 @@ float *wypelnij_fp(int np, float *xp)
 // Funkcja obliczaj¹ca wartoœci ze wzoru Newtona
 float *wypelnij_L(int n, int np, float *x, float *xp, float *f)
 {
-	if ((n > 0) && (np > 0) && (x != NULL) && (xp != NULL) ){
-		float *L = new float[np];
-		float temp = 0;
+    if ((n > 0) && (np > 0) && (x != NULL) && (xp != NULL) ){
+        float *L = new float[np];    //ta tablica ma miec 150 elementow bo to sa wartosci dla xp
+        float temp = 0;
 
-		for (int i = 0; i < np; i++) {
-			for (int j = 0; j < np; j++)
-			{
-				temp += iloraz_roznicowy(i, x, f) * omega(j, xp[i], x);
-			}
-			L[i] = temp;
-		}
-		return L;
-	}
-	else {
-		string exc;
-		if (n <= 0) {
-			exc = "InsufficientNodesAmountException: n <= 0; at ";
-		}
-		else if (np <= 0) {
-			exc = "InsufficientNodesAmountException: np <= 0; at ";
-		}
-		else if (x == NULL) {
-			exc = "NullPointerException: parameter float *x; at ";
-		}
-		else if (xp == NULL) {
-			exc = "NullPointerException: parameter float *xp; at ";
-		}
-		else {
-			exc = "GeneralException; at ";
-		}
-		throw exception(exc.append(__func__).c_str());
-	}
+        for (int i = 0; i < np; i++) {
+            for (int j = 0; j < n; j++)        //ilosc wezlow od 2
+            {
+                temp += iloraz_roznicowy(j, x, f) * omega(j, x, xp[i]);        //a i omega s¹ tego samego stopnia
+            }
+            L[i] = temp;
+        }
+        return L;
+    }
+    else {
+        string exc;
+        if (n <= 0) {
+            exc = "InsufficientNodesAmountException: n <= 0; at ";
+        }
+        else if (np <= 0) {
+            exc = "InsufficientNodesAmountException: np <= 0; at ";
+        }
+        else if (x == NULL) {
+            exc = "NullPointerException: parameter float *x; at ";
+        }
+        else if (xp == NULL) {
+            exc = "NullPointerException: parameter float *xp; at ";
+        }
+        else {
+            exc = "GeneralException; at ";
+        }
+        throw exception(exc.append(__func__).c_str());
+    }
 }
 
 // Funkcja zapisuje wyniki operacji do pliku
