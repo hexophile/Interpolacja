@@ -208,6 +208,7 @@ float *wypelnij_L(int n, int np, float *x, float *xp, float *f)
                 temp +=  temp1 * temp2;        //a i omega s¹ tego samego stopnia
             }
             L[i] = temp;
+			temp = 0;
         }
         return L;
     }
