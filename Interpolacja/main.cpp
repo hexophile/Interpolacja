@@ -11,8 +11,8 @@ int main()
 		float a = -3, b = 3;
 
 		float *optX = optymalneX(n, a, b);
-		float *x = rownoodlegleX(n, a, b);
 
+		float *x = rownoodlegleX(n, a, b);
 		float *f = wypelnij_f(n, x);
 		
 		float *xp = rownoodlegleX(np, a, b);
