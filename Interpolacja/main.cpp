@@ -17,7 +17,7 @@ int main()
 		float *xp = rownoodlegleX(np, a, b);
 		float *fp = wypelnij_fp(np, xp);
 
-		float *L = wypelnij_L(n, np, x, xp, f); // brak
+		float *L = wypelnij_L(n, np, x, xp, f);
 
 		for (int i = 0; i <= n; i++)
 			cout << "f(" << x[i] << ") = " << ((i<n)?f[i]:0.0) << endl;
@@ -27,6 +27,10 @@ int main()
 
 		for (int i = 0; i < np; i++)
 			cout << "L(" << x[i] << ")\t = " << L[i] << endl;
+
+		zapisz_wyniki("rownoodlegle.txt", n, np, x, xp, f, a, b);
+
+		// zapisz_wyniki("optymalne.txt", n, np, optX, xp, f, a, b); TODO
 	}
 	catch (exception e)
 	{

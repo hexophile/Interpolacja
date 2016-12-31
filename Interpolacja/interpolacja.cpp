@@ -233,26 +233,26 @@ float *wypelnij_L(int n, int np, float *x, float *xp, float *f)
 void zapisz_wyniki(char *fn, int n, int np, float *x, float *xp, float *f, float a, float b)
 {
 	if ((fn != NULL) && (fn != "")) {
-		fstream plik;
+		ofstream plik;
 		plik.open(fn);
 
 		if (plik)
 		{
-			plik << n << " " << np << a << b << endl;
+			plik << n << " " << np << " " << a << " " << b << " ";
 
 			for (int i = 0; i < n; i++)
 			{
-				plik << x[i] << endl;
+				plik << x[i] << " ";
 			}
 
 			for (int i = 0; i < np; i++)
 			{
-				plik << xp[i] << endl;
+				plik << xp[i] << " ";
 			}
 
 			for (int i = 0; i < n; i++)
 			{
-				plik << f[i] << endl;
+				plik << f[i] << " ";
 			}
 
 			plik.close();
