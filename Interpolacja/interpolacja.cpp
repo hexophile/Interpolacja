@@ -18,7 +18,6 @@ float *rownoodlegleX(int n, float a, float b)
 	if ((a < b) && (n > 0)) {
 		float *tab = new float[n+1];
 
-// Dla n = 7 zostanie wygenerowanych... 8 punktów. Od -3 do -3 w³¹cznie. Nie wiem czy to ma tak byæ, teraz generujê 7
 		for (int i = 0; i <= n; i++)
 		{
 			tab[i] = r_xp(n, i, a, b);
@@ -48,7 +47,7 @@ float *optymalneX(int n, float a, float b)
 		float temp1, temp2;
 
 		for (int i = 0; i <= n; i++)
-		{
+		{ // Ta czêœæ by³a zbyt ciê¿ka dla programu i nale¿a³o j¹ rozbiæ na zmienne pomocniczne
 			temp1 = (2 * i) + 1;
 			temp2 = (2 * n) + 2;
 			temp1 /= temp2;
@@ -79,7 +78,7 @@ float omega(int i, float *x, float xp)
 		float iloczyn = 1;
 		for (int j = 0; j < i - 1; j++)
 		{
-			iloczyn *= (xp - x[j]);        //omega od x czyli dla 1 z tych 150
+			iloczyn *= xp - x[j];        //omega od x czyli dla 1 z tych 150
 		}
 		return iloczyn;
 	}
@@ -145,7 +144,6 @@ float *wypelnij_f(int n, float *x)
 		for (int i = 0; i < n; i++)
 		{
 			f[i] = abs(sin(x[i]));
-			cout << "f" << i << "=" << f[i] << endl;
 		}
 		return f;
 	}
@@ -198,11 +196,13 @@ float *wypelnij_L(int n, int np, float *x, float *xp, float *f)
     if ((n > 0) && (np > 0) && (x != NULL) && (xp != NULL) ){
         float *L = new float[np];    //ta tablica ma miec 150 elementow bo to sa wartosci dla xp
         float temp = 0;
-
+		float temp1, temp2;
         for (int i = 0; i < np; i++) {
             for (int j = 0; j < n; j++)        //ilosc wezlow od 2
             {
-                temp += iloraz_roznicowy(j, x, f) * omega(j, x, xp[i]);        //a i omega s¹ tego samego stopnia
+				temp1 = iloraz_roznicowy(j, x, f);
+				temp2 = omega(j, x, xp[i]);
+                temp +=  temp1 * temp2;        //a i omega s¹ tego samego stopnia
             }
             L[i] = temp;
         }
