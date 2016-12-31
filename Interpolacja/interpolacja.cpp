@@ -191,6 +191,38 @@ float *wypelnij_fp(int np, float *xp)
 	}
 }
 
+// Funkcja obliczaj¹ca wartoœæ L(x) w danym punkcie
+float oblicz_L(int n, int np, float *x, float xp, float *f)
+{
+	if ((n > 0) && (np > 0) && (x != NULL)) {
+		float temp = 0;
+		float temp1, temp2;
+
+		for (int j = 0; j < n; j++)        //ilosc wezlow od 2
+		{
+			temp1 = iloraz_roznicowy(j, x, f);
+			temp2 = omega(j, x, xp);
+			temp += temp1 * temp2;        //a i omega s¹ tego samego stopnia
+		}
+		return temp;
+	}
+	else {
+		string exc;
+		if (n <= 0) {
+			exc = "InsufficientNodesAmountException: n <= 0; at ";
+		}
+		else if (np <= 0) {
+			exc = "InsufficientNodesAmountException: np <= 0; at ";
+		}
+		else if (x == NULL) {
+			exc = "NullPointerException: parameter float *x; at ";
+		}
+		else {
+			exc = "GeneralException; at ";
+		}
+		throw exception(exc.append(__func__).c_str());
+	}
+}
 
 // Funkcja obliczaj¹ca wartoœci ze wzoru Newtona
 float *wypelnij_L(int n, int np, float *x, float *xp, float *f)
@@ -201,13 +233,15 @@ float *wypelnij_L(int n, int np, float *x, float *xp, float *f)
 		float temp1, temp2;
 
         for (int i = 0; i < np; i++) {
-            for (int j = 0; j < n; j++)        //ilosc wezlow od 2
+/*
+			for (int j = 0; j < n; j++)        //ilosc wezlow od 2
             {
 				temp1 = iloraz_roznicowy(j, x, f);
 				temp2 = omega(j, x, xp[i]);
                 temp +=  temp1 * temp2;        //a i omega s¹ tego samego stopnia
             }
-            L[i] = temp;
+*/
+            L[i] = oblicz_L(n, np, x, xp[i], f);
 			temp = 0;
         }
         return L;
