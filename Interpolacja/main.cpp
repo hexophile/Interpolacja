@@ -16,7 +16,7 @@ int main()
 		float *f = wypelnij_f(n, x);
 		
 		float *xp = rownoodlegleX(np, a, b);
-		float *fp = wypelnij_fp(np, xp);
+		float *fp = wypelnij_f(np, xp);
 
 		float *L = wypelnij_L(n, np, x, xp, f);
 

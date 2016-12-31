@@ -62,15 +62,6 @@ float *x - punkty
 float *wypelnij_f(int &n, float *x);
 
 /*
-Obliczanie wartoœci funkcji interpolowanej f(x) w punktach  '*xp'
-
-int &np - liczba punktów
-float *xp - punkty
-*/
-float *wypelnij_fp(int &np, float *xp);
-
-
-/*
 Funkcja obliczaj¹ca wartoœæ L(x) w danym punkcie
 
 int &n - liczba punktów
@@ -79,7 +70,7 @@ float *x - punkty
 float &xp - wybrany punkt
 float *f - wartoœci funkcji interpolowanej
 */
-float oblicz_L(int &n, int &np, float *x, float &xp, float *f);
+float oblicz_L(int &n, float *x, float &xp, float *f);
 
 /*
 Funkcja obliczaj¹ca wartoœci ze wzoru Newtona

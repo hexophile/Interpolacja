@@ -164,37 +164,10 @@ float *wypelnij_f(int &n, float *x)
 	}
 }
 
-// Obliczanie wartoœci funkcji 'f(x)' w punktach '*xp'
-float *wypelnij_fp(int &np, float *xp)
-{
-	if ((np > 0) && (xp != NULL)) {
-		float *fp = new float[np];
-
-		for (int i = 0; i < np; i++)
-		{
-			fp[i] = abs(sin(xp[i]));
-		}
-		return fp;
-	}
-	else {
-		string exc;
-		if (np <= 0) {
-			exc = "InsufficientNodesAmountException: np <= 0; at ";
-		}
-		else if (xp == NULL) {
-			exc = "NullPointerException: parameter float *xp; at ";
-		}
-		else {
-			exc = "GeneralException; at ";
-		}
-		throw exception(exc.append(__func__).c_str());
-	}
-}
-
 // Funkcja obliczaj¹ca wartoœæ L(x) w danym punkcie
-float oblicz_L(int &n, int &np, float *x, float &xp, float *f)
+float oblicz_L(int &n, float *x, float &xp, float *f)
 {
-	if ((n > 0) && (np > 0) && (x != NULL)) {
+	if ((n > 0) && (x != NULL)) {
 		float temp = 0;
 		float temp1, temp2;
 
@@ -210,9 +183,6 @@ float oblicz_L(int &n, int &np, float *x, float &xp, float *f)
 		string exc;
 		if (n <= 0) {
 			exc = "InsufficientNodesAmountException: n <= 0; at ";
-		}
-		else if (np <= 0) {
-			exc = "InsufficientNodesAmountException: np <= 0; at ";
 		}
 		else if (x == NULL) {
 			exc = "NullPointerException: parameter float *x; at ";
@@ -241,7 +211,7 @@ float *wypelnij_L(int &n, int &np, float *x, float *xp, float *f)
                 temp +=  temp1 * temp2;        //a i omega s¹ tego samego stopnia
             }
 */
-            L[i] = oblicz_L(n, np, x, xp[i], f);
+            L[i] = oblicz_L(n, x, xp[i], f);
 			temp = 0;
         }
         return L;
