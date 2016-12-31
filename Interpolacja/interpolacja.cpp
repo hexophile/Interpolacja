@@ -76,6 +76,7 @@ float omega(int &i, float *x, float &xp)
 {
 	if ((i > 0) && (x != NULL)) {
 		float iloczyn = 1;
+
 		for (int j = 0; j < i - 1; j++)
 		{
 			iloczyn *= xp - x[j];        //omega od x czyli dla 1 z tych 150
@@ -104,8 +105,7 @@ float omega(int &i, float *x, float &xp)
 float iloraz_roznicowy(int &n, float *x, float *f)
 {
 	if ((n >= 0) && (x != NULL) && (f != NULL)) {
-		float suma = 0, iloczyn = 1;
-		suma = f[0];                //iloraz 0 rzedzu oparty na punkcie xi ma wartosc funkci w tym punkcie
+		float suma = f[0], iloczyn = 1; //iloraz 0 rzedzu oparty na punkcie xi ma wartosc funkci w tym punkcie
 
 		for (int i = 1; i < n; i++) // suma od 1 bo dla 0 nic sie nie dzieje
 		{
@@ -168,8 +168,7 @@ float *wypelnij_f(int &n, float *x)
 float oblicz_L(int &n, float *x, float &xp, float *f)
 {
 	if ((n > 0) && (x != NULL)) {
-		float temp = 0;
-		float temp1, temp2;
+		float temp = 0, temp1, temp2;
 
 		for (int j = 0; j < n; j++)        //ilosc wezlow od 2
 		{
@@ -199,8 +198,7 @@ float *wypelnij_L(int &n, int &np, float *x, float *xp, float *f)
 {
     if ((n > 0) && (np > 0) && (x != NULL) && (xp != NULL) ){
         float *L = new float[np];    //ta tablica ma miec 150 elementow bo to sa wartosci dla xp
-        float temp = 0;
-		float temp1, temp2;
+        float temp = 0, temp1, temp2;
 
         for (int i = 0; i < np; i++) {
 /*
@@ -210,6 +208,7 @@ float *wypelnij_L(int &n, int &np, float *x, float *xp, float *f)
 				temp2 = omega(j, x, xp[i]);
                 temp +=  temp1 * temp2;        //a i omega s¹ tego samego stopnia
             }
+			L[i] = temp;
 */
             L[i] = oblicz_L(n, x, xp[i], f);
 			temp = 0;
