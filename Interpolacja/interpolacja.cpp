@@ -7,13 +7,13 @@
 using namespace std;
 
 // Szacowanie wartoœci punktu 'x' w równoodleg³ym wybieraniu punktów na zadanym przedziale
-float r_xp(int n, int i, float a, float b)
+float r_xp(int &n, int &i, float &a, float &b)
 {
 	return a + i * ((b - a) / n);
 }
 
 // Wybieranie 'n' równoodleg³ych punktów 'x' na zadanym przedziale
-float *rownoodlegleX(int n, float a, float b)
+float *rownoodlegleX(int &n, float &a, float &b)
 {
 	if ((a < b) && (n > 0)) {
 		float *tab = new float[n+1];
@@ -30,7 +30,7 @@ float *rownoodlegleX(int n, float a, float b)
 			exc = "InsufficientNodesAmountException: n <= 0; at ";
 		}
 		else if (a >= b) {
-			exc = "InsufficientRangeException: parameter float a <= float b; at ";
+			exc = "InsufficientRangeException: parameter float &a <= float &b; at ";
 		}
 		else {
 			exc = "GeneralException; at ";
@@ -40,7 +40,7 @@ float *rownoodlegleX(int n, float a, float b)
 }
 
 // Dobieranie 'n' optymalnie odleg³ych punktów 'x' na zadanym przedziale
-float *optymalneX(int n, float a, float b)
+float *optymalneX(int &n, float &a, float &b)
 {
 	if ((a < b) && (n > 0)) {
 		float *tab = new float[n+1];
@@ -62,7 +62,7 @@ float *optymalneX(int n, float a, float b)
 			exc = "InsufficientNodesAmountException: n <= 0; at ";
 		}
 		else if (a >= b) {
-			exc = "InsufficientRangeException: parameter float a <= float b; at ";
+			exc = "InsufficientRangeException: parameter float &a <= float &b; at ";
 		}
 		else {
 			exc = "GeneralException; at ";
@@ -72,7 +72,7 @@ float *optymalneX(int n, float a, float b)
 }
 
 // Obliczanie wartoœci omegi
-float omega(int i, float *x, float xp)
+float omega(int &i, float *x, float &xp)
 {
 	if ((i > 0) && (x != NULL)) {
 		float iloczyn = 1;
@@ -101,7 +101,7 @@ float omega(int i, float *x, float xp)
 }
 
 // Funkcja obliczaj¹ca wartoœæ parametru 'a' we wzorze newtona
-float iloraz_roznicowy(int n, float *x, float *f)
+float iloraz_roznicowy(int &n, float *x, float *f)
 {
 	if ((n >= 0) && (x != NULL) && (f != NULL)) {
 		float suma = 0, iloczyn = 1;
@@ -138,7 +138,7 @@ float iloraz_roznicowy(int n, float *x, float *f)
 }
 
 // Obliczanie wartoœci funkcji 'f(x)' w punktach '*x'
-float *wypelnij_f(int n, float *x)
+float *wypelnij_f(int &n, float *x)
 {
 	if ((n > 0) && (x != NULL)) {
 		float *f = new float[n];
@@ -165,7 +165,7 @@ float *wypelnij_f(int n, float *x)
 }
 
 // Obliczanie wartoœci funkcji 'f(x)' w punktach '*xp'
-float *wypelnij_fp(int np, float *xp)
+float *wypelnij_fp(int &np, float *xp)
 {
 	if ((np > 0) && (xp != NULL)) {
 		float *fp = new float[np];
@@ -192,7 +192,7 @@ float *wypelnij_fp(int np, float *xp)
 }
 
 // Funkcja obliczaj¹ca wartoœæ L(x) w danym punkcie
-float oblicz_L(int n, int np, float *x, float xp, float *f)
+float oblicz_L(int &n, int &np, float *x, float &xp, float *f)
 {
 	if ((n > 0) && (np > 0) && (x != NULL)) {
 		float temp = 0;
@@ -225,7 +225,7 @@ float oblicz_L(int n, int np, float *x, float xp, float *f)
 }
 
 // Funkcja obliczaj¹ca wartoœci ze wzoru Newtona
-float *wypelnij_L(int n, int np, float *x, float *xp, float *f)
+float *wypelnij_L(int &n, int &np, float *x, float *xp, float *f)
 {
     if ((n > 0) && (np > 0) && (x != NULL) && (xp != NULL) ){
         float *L = new float[np];    //ta tablica ma miec 150 elementow bo to sa wartosci dla xp
@@ -268,7 +268,7 @@ float *wypelnij_L(int n, int np, float *x, float *xp, float *f)
 }
 
 // Funkcja zapisuje wyniki operacji do pliku
-void zapisz_wyniki(char *fn, int n, int np, float *x, float *xp, float *f, float *L, float a, float b)
+void zapisz_wyniki(char *fn, int &n, int &np, float *x, float *xp, float *f, float *L, float &a, float &b)
 {
 	if ((fn != NULL) && (fn != "")) {
 		ofstream plik;

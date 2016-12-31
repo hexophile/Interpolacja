@@ -7,7 +7,8 @@ using namespace std;
 int main()
 {
 	try {
-		int np = 150, n = 7, a = -3, b = 3;
+		int np = 150, n = 7;
+		float a = -3, b = 3;
 
 		float *optX = optymalneX(n, a, b);
 
