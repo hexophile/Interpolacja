@@ -92,4 +92,4 @@ float *f - wartoœci funkcji interpolowanej
 float a - pocz¹tek przedzia³u
 float b - koniec przedzia³u
 */
-void zapisz_wyniki(char *fn, int n, int np, float *x, float *xp, float *f, float a, float b);
+void zapisz_wyniki(char *fn, int n, int np, float *x, float *xp, float *f, float *L, float a, float b);

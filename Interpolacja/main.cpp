@@ -28,7 +28,7 @@ int main()
 		for (int i = 0; i < np; i++)
 			cout << "L(" << x[i] << ")\t = " << L[i] << endl;
 
-		zapisz_wyniki("rownoodlegle.txt", n, np, x, xp, f, a, b);
+		zapisz_wyniki("rownoodlegle.txt", n, np, x, xp, fp, L, a, b);
 
 		// zapisz_wyniki("optymalne.txt", n, np, optX, xp, f, a, b); TODO
 	}

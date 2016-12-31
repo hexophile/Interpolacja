@@ -234,7 +234,7 @@ float *wypelnij_L(int n, int np, float *x, float *xp, float *f)
 }
 
 // Funkcja zapisuje wyniki operacji do pliku
-void zapisz_wyniki(char *fn, int n, int np, float *x, float *xp, float *f, float a, float b)
+void zapisz_wyniki(char *fn, int n, int np, float *x, float *xp, float *f, float *L, float a, float b)
 {
 	if ((fn != NULL) && (fn != "")) {
 		ofstream plik;
@@ -248,19 +248,23 @@ void zapisz_wyniki(char *fn, int n, int np, float *x, float *xp, float *f, float
 			{
 				plik << x[i] << " ";
 			}
+			plik << endl; // Nowy wiersz
 
-			plik << endl;
+			for (int i = 0; i < np; i++)
+			{ // Wartoœci funkcji interpolowanej f(x)
+				plik << f[i] << " ";
+			}
+			plik << endl; // Nowy wiersz
 
 			for (int i = 0; i < np; i++)
 			{
 				plik << xp[i] << " ";
 			}
+			plik << endl; // Nowy wiersz
 
-			plik << endl;
-
-			for (int i = 0; i < n; i++)
-			{
-				plik << f[i] << " ";
+			for (int i = 0; i < np; i++)
+			{ // Wartoœci funkcji L(x)
+				plik << L[i] << " ";
 			}
 
 			plik.close();
