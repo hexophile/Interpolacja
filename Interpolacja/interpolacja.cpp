@@ -106,6 +106,7 @@ float iloraz_roznicowy(int n, float *x, float *f)
 	if ((n >= 0) && (x != NULL) && (f != NULL)) {
 		float suma = 0, iloczyn = 1;
 		suma = f[0];                //iloraz 0 rzedzu oparty na punkcie xi ma wartosc funkci w tym punkcie
+
 		for (int i = 1; i < n; i++) // suma od 1 bo dla 0 nic sie nie dzieje
 		{
 			for (int j = 0; j < n; j++)
@@ -114,6 +115,7 @@ float iloraz_roznicowy(int n, float *x, float *f)
 					iloczyn *= (x[i] - x[j]);
 			}
 			suma += f[i] / iloczyn;
+			iloczyn = 1;
 		}
 		return suma;
 	}
@@ -197,6 +199,7 @@ float *wypelnij_L(int n, int np, float *x, float *xp, float *f)
         float *L = new float[np];    //ta tablica ma miec 150 elementow bo to sa wartosci dla xp
         float temp = 0;
 		float temp1, temp2;
+
         for (int i = 0; i < np; i++) {
             for (int j = 0; j < n; j++)        //ilosc wezlow od 2
             {
@@ -238,17 +241,21 @@ void zapisz_wyniki(char *fn, int n, int np, float *x, float *xp, float *f, float
 
 		if (plik)
 		{
-			plik << n << " " << np << " " << a << " " << b << " ";
+			plik << n << " " << np << endl << a << " " << b << " " << endl;
 
 			for (int i = 0; i < n; i++)
 			{
 				plik << x[i] << " ";
 			}
 
+			plik << endl;
+
 			for (int i = 0; i < np; i++)
 			{
 				plik << xp[i] << " ";
 			}
+
+			plik << endl;
 
 			for (int i = 0; i < n; i++)
 			{
