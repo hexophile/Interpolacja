@@ -77,7 +77,7 @@ float omega(int &i, float *x, float &xp)
 	if ((i > 0) && (x != NULL)) {
 		float iloczyn = 1;
 
-		for (int j = 0; j < i - 1; j++)
+		for (int j = 0; j <= i - 1; j++)
 		{
 			iloczyn *= xp - x[j];        //omega od x czyli dla 1 z tych 150
 		}
@@ -105,11 +105,11 @@ float omega(int &i, float *x, float &xp)
 float iloraz_roznicowy(int &n, float *x, float *f)
 {
 	if ((n >= 0) && (x != NULL) && (f != NULL)) {
-		float suma = f[0], iloczyn = 1; //iloraz 0 rzedzu oparty na punkcie xi ma wartosc funkci w tym punkcie
+		float suma = 0, iloczyn = 1;
 
-		for (int i = 1; i < n; i++) // suma od 1 bo dla 0 nic sie nie dzieje
+		for (int i = 0; i <= n; i++) 
 		{
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j <= n; j++)
 			{
 				if (j != i)
 					iloczyn *= (x[i] - x[j]);
@@ -118,6 +118,10 @@ float iloraz_roznicowy(int &n, float *x, float *f)
 			iloczyn = 1;
 		}
 		return suma;
+	}
+	else if ((n == 0) && (x != NULL) && (f != NULL))
+	{
+		return f[0];//iloraz 0 rzedzu oparty na punkcie xi ma wartosc funkci w tym punkcie
 	}
 	else {
 		string exc;
@@ -267,7 +271,7 @@ void zapisz_wyniki(char *fn, int &n, int &np, float *x, float *xp, float *f, flo
 
 			for (int i = 0; i < np; i++)
 			{ // Wartoœci funkcji L(x)
-				plik << L[i] << " ";
+				plik << L[i] << " "<<xp[i]<<" "<<f[i]<<endl;
 			}
 
 			plik.close();
