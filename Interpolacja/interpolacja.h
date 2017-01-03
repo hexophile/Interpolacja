@@ -84,15 +84,24 @@ float *f - wartoœci funkcji interpolowanej
 float *wypelnij_L( int &n, int &np, float *x, float *xp, float *f );
 
 /*
+Funkcja pobiera dane z konsoli
+float &a - poczatek przedzialu
+float &b - koniec przedzialu
+int &n - ilosc weslow interpolacji
+char &metoda_uruchamiania - sposób dobierania wêz³ów (optymalny lub równoodleg³y)
+*/
+void pobieranie_danych(float &a, float &b, int &n, char &metoda_uruchamiania);
+/*
 Funkcja zapisuje wyniki operacji do pliku
 
 string fn - nazwa pliku
 int &n - liczba punktów
 int &np - liczba punktów
 float *x - punkty
+float *f - wartosci dla x
 float *xp - punkty
-float *f - wartoœci funkcji interpolowanej
+float *fp - wartoœci funkcji interpolowanej
 float &a - pocz¹tek przedzia³u
 float &b - koniec przedzia³u
 */
-void zapisz_wyniki(char *fn, int &n, int &np, float *x, float *xp, float *f, float *L, float &a, float &b);
+void zapisz_wyniki(char *fn, int &n, int &np, float *x, float *f, float *xp, float *fp, float *L, float &a, float &b);

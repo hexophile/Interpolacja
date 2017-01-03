@@ -239,9 +239,21 @@ float *wypelnij_L(int &n, int &np, float *x, float *xp, float *f)
         throw exception(exc.append(__func__).c_str());
     }
 }
-
+void pobieranie_danych(float &a, float &b, int &n, char &metoda_uruchamiania)
+{
+	cout << "podaj pocz¹tek przedzia³u" << endl;
+	cin >> a;
+	cout << "podaj koniec przedzia³u" << endl;
+	cin >> b;
+	cout << "podaj ilosc wezlow" << endl;
+	cin >> n;
+	cout << "metoda dobierania x, [o]ptymalna, [r]ównoodleg³a" << endl;
+	cin >> metoda_uruchamiania;
+	if (metoda_uruchamiania != 'o')
+		metoda_uruchamiania = 'r';
+}
 // Funkcja zapisuje wyniki operacji do pliku
-void zapisz_wyniki(char *fn, int &n, int &np, float *x, float *xp, float *f, float *L, float &a, float &b)
+void zapisz_wyniki(char *fn, int &n, int &np, float *x,float *f, float *xp, float *fp, float *L, float &a, float &b)
 {
 	if ((fn != NULL) && (fn != "")) {
 		ofstream plik;
@@ -253,14 +265,14 @@ void zapisz_wyniki(char *fn, int &n, int &np, float *x, float *xp, float *f, flo
 
 			for (int i = 0; i < n; i++)
 			{
-				plik << x[i] << " ";
+				plik << x[i] <<" "<< f[i] <<endl;
 			}
 			plik << endl; // Nowy wiersz
 
-			for (int i = 0; i < np; i++)
-			{ // Wartoœci funkcji interpolowanej f(x)
-				plik << f[i] << " ";
-			}
+		//	for (int i = 0; i < np; i++)
+		//	{ // Wartoœci funkcji interpolowanej f(x)
+		//		plik << f[i] << " ";
+		//	}
 			plik << endl; // Nowy wiersz
 
 			for (int i = 0; i < np; i++)
@@ -271,7 +283,7 @@ void zapisz_wyniki(char *fn, int &n, int &np, float *x, float *xp, float *f, flo
 
 			for (int i = 0; i < np; i++)
 			{ // Wartoœci funkcji L(x)
-				plik << L[i] << " "<<xp[i]<<" "<<f[i]<<endl;
+				plik << L[i] << " "<<xp[i]<<" "<<fp[i]<<endl;
 			}
 
 			plik.close();
