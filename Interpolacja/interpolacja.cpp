@@ -147,7 +147,7 @@ float *wypelnij_f(int &n, float *x)
 	if ((n > 0) && (x != NULL)) {
 		float *f = new float[n];
 
-		for (int i = 0; i < n; i++)
+		for (int i = 0; i <= n; i++)
 		{
 			f[i] = abs(sin(x[i]));
 		}
@@ -174,7 +174,7 @@ float oblicz_L(int &n, float *x, float &xp, float *f)
 	if ((n > 0) && (x != NULL)) {
 		float temp = 0, temp1, temp2;
 
-		for (int j = 0; j < n; j++)        //ilosc wezlow od 2
+		for (int j = 0; j <= n; j++)        //ilosc wezlow od 2
 		{
 			temp1 = iloraz_roznicowy(j, x, f);
 			temp2 = omega(j, x, xp);
@@ -263,7 +263,7 @@ void zapisz_wyniki(char *fn, int &n, int &np, float *x,float *f, float *xp, floa
 		{
 			plik << n << " " << np << endl << a << " " << b << " " << endl;
 
-			for (int i = 0; i < n; i++)
+			for (int i = 0; i <= n; i++)
 			{
 				plik << x[i] <<" "<< f[i] <<endl;
 			}
