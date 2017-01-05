@@ -105,6 +105,9 @@ float omega(int &i, float *x, float &xp)
 float iloraz_roznicowy(int &n, float *x, float *f)
 {
 	if ((n >= 0) && (x != NULL) && (f != NULL)) {
+		if (n == 0)
+			return f[0]; // iloraz 0 rzedzu oparty na punkcie xi ma wartosc funkci w tym punkcie
+
 		float suma = 0, iloczyn = 1;
 
 		for (int i = 0; i <= n; i++) 
@@ -118,10 +121,6 @@ float iloraz_roznicowy(int &n, float *x, float *f)
 			iloczyn = 1;
 		}
 		return suma;
-	}
-	else if ((n == 0) && (x != NULL) && (f != NULL))
-	{
-		return f[0];//iloraz 0 rzedzu oparty na punkcie xi ma wartosc funkci w tym punkcie
 	}
 	else {
 		string exc;
@@ -149,7 +148,7 @@ float *wypelnij_f(int &n, float *x)
 
 		for (int i = 0; i <= n; i++)
 		{
-			f[i] = abs(sin(x[i]));
+			f[i] = abs(sin(x[i])); // f(x) = |sin(X)|
 		}
 		return f;
 	}
@@ -166,7 +165,7 @@ float *wypelnij_f(int &n, float *x)
 		}
 		throw exception(exc.append(__func__).c_str());
 	}
-}
+} // TODO: zrobiæ to na wskaŸnikach do funkcji
 
 // Funkcja obliczaj¹ca wartoœæ L(x) w danym punkcie
 float oblicz_L(int &n, float *x, float &xp, float *f)
@@ -205,15 +204,7 @@ float *wypelnij_L(int &n, int &np, float *x, float *xp, float *f)
         float temp = 0, temp1, temp2;
 
         for (int i = 0; i < np; i++) {
-/*
-			for (int j = 0; j < n; j++)        //ilosc wezlow od 2
-            {
-				temp1 = iloraz_roznicowy(j, x, f);
-				temp2 = omega(j, x, xp[i]);
-                temp +=  temp1 * temp2;        //a i omega s¹ tego samego stopnia
-            }
-			L[i] = temp;
-*/
+			// Obliczanie kolejnych wartoœci L(xp)
             L[i] = oblicz_L(n, x, xp[i], f);
 			temp = 0;
         }
@@ -239,6 +230,8 @@ float *wypelnij_L(int &n, int &np, float *x, float *xp, float *f)
         throw exception(exc.append(__func__).c_str());
     }
 }
+
+// Funkcja pobiera dane z konsoli
 void pobieranie_danych(float &a, float &b, int &n, char &metoda_uruchamiania)
 {
 	cout << "podaj pocz¹tek przedzia³u" << endl;
@@ -251,10 +244,11 @@ void pobieranie_danych(float &a, float &b, int &n, char &metoda_uruchamiania)
 	cin >> metoda_uruchamiania;
 	if (metoda_uruchamiania != 'o')
 		metoda_uruchamiania = 'r';
-}
+} // TODO: exceptions
+
 // Funkcja zapisuje wyniki operacji do pliku
 void zapisz_wyniki(char *fn, int &n, int &np, float *x,float *f, float *xp, float *fp, float *L, float &a, float &b)
-{
+{ // Zosta³o du¿o nieu¿ywanych parametrów z czasów testów
 	if ((fn != NULL) && (fn != "")) {
 		ofstream plik;
 		plik.open(fn);
@@ -267,12 +261,6 @@ void zapisz_wyniki(char *fn, int &n, int &np, float *x,float *f, float *xp, floa
 			{
 				plik << x[i] <<" "<< f[i] <<endl;
 			}
-			plik << endl; // Nowy wiersz
-
-		//	for (int i = 0; i < np; i++)
-		//	{ // Wartoœci funkcji interpolowanej f(x)
-		//		plik << f[i] << " ";
-		//	}
 			plik << endl; // Nowy wiersz
 
 			for (int i = 0; i < np; i++)
